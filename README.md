@@ -19,7 +19,7 @@ In this reduced set, departure and arrivals are then removed to generate every p
 
 Project comes with default settings, if you want/have to change some, here's how can do so:
 
-1 - In file api/config.js 
+- In file api/config.js 
 ```
 const database = {
 	name: 'autocar',
@@ -38,9 +38,9 @@ const backoffice = {
 ```
 The database object defines how the API will connect to the mongo service, the api object defines how third-parties will connect to it, the backoffice object tells who is allowed to modify resources.
 
-2 - In file backoffice/src/config.js you need to put the same api options than previously
-3 - In file frontend/src/config.js you need to put the same api options than previously
-4 - In file backoffice/package.json you need to force the port (default 3000)
+- In file backoffice/src/config.js you need to put the same api options than previously
+- In file frontend/src/config.js you need to put the same api options than previously
+- In file backoffice/package.json you need to force the port (default 3000)
 
 ```
 "scripts": {
