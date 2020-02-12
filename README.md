@@ -52,7 +52,7 @@ The database object defines how the API will connect to the mongo service, the a
 ```
 # Installation
 
-Dependencies are handled by webpack, hence installtion is easy
+Dependencies are handled by webpack, hence installation is easy
 
 ```
 cd api/
@@ -69,10 +69,16 @@ npm install
 
 # Running
 First, you'll need to run the mongo service with the port you put in api/config.js (default 27042)
+
 ```
 mongod --port 27042
 ```
-Then you can start the API server
+If something goes wrong, you might be missing the MongoDB storage directory:
+```
+sudo mkdir /data/{,db}/
+sudo chmod 777 /data/db
+```
+When mongod launches properly, you can proceed:
 ```
 cd api/
 npm start
