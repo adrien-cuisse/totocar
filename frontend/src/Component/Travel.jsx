@@ -91,15 +91,9 @@ const Travel = () => {
 	};
 
 	const renderPaths = () => {
-		if (JSON.stringify(paths) === JSON.stringify([null])) { // 
-			return (
-				<div className='p-4'>
-					<p>
-						No path found for your budget :/
-					</p>
-				</div>
-			)
-		} else if (JSON.stringify(paths) === JSON.stringify([])) { // default state
+		if (JSON.stringify(paths) === JSON.stringify([null])) { // nothing in constraints range 
+			return <></>
+		} else if (JSON.stringify(paths) === JSON.stringify([])) { // default state / line doesn't exist
 			return <></>;
 		} else {
 			return (
