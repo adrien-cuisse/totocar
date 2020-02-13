@@ -42,6 +42,9 @@ const path = (request, response) => {
 
 	fromCityToCity(request.body.from, request.body.to)
 		.then(lines => {
+			if (0 === lines.length) {
+				return [];
+			}
 			return lines.map(line => {
 				
 				// These might change in the future

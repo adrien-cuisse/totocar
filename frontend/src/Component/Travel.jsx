@@ -36,6 +36,8 @@ const Travel = () => {
 	 */
 	const [paths, setPaths] = useState([]);
 
+	const [error, setError] = useState('');
+
 	const api = config.api.url + ':' + config.api.port + '/api/my-travel';
 	
 	const handleBudgetChange = event => {
@@ -72,7 +74,17 @@ const Travel = () => {
 		})
 		.then(response => {
 			if (response.data.success) {
-				setPaths(response.data.routes)
+				setPaths(response.data.routes);
+				if (0 === response.data.routes.length) {
+					setPaths([]);
+					setError("We don't have any line linking those cities");
+				} else if (null === response.data.routes[0]) {
+					setPaths([]);
+					setError('No route found for your budget');
+				} else {
+					setError('');
+					setPaths(response.data.routes);
+				}
 			} 
 		})
 		.catch(error => console.log('AXIOS error:', error));
@@ -163,12 +175,20 @@ const Travel = () => {
 			<button className='btn btn-info btn-block' onClick={ handleSubmit }>Find my options</button>
 		</form>
 	);
-		
+	
+	const renderError = () => {
+		if ('' !== error) {
+			return (
+				<div className='alert alert-warning mt-4 mb-4'>{ error }</div>
+			);
+		}
+	};
 	
 	return (
 		<>
 		{ renderForm() }
 		{ renderPaths() }
+		{ renderError() }
 		</>
 	)
 };
