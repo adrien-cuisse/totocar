@@ -79,7 +79,6 @@ const createCity = (request, response) => {
 			entity: city,
 		}))
 		.catch(errors => {
-			console.log(extractValidationErrors(errors));
 			response.json({
 				success: false,
 				errors: extractValidationErrors(errors),

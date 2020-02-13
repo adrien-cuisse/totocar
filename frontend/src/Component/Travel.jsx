@@ -6,16 +6,34 @@ import axios from 'axios';
 import config from './../config';
 
 
+/**
+ * Page for on-demand routes
+ */
 const Travel = () => {
 
+	/**
+	 * Price the user can pay
+	 */
 	const [budget, setBudget] = useState('8');
 
+	/**
+	 * User's time constraint for his travel
+	 */
 	const [time, setTime] = useState('04:00');
 
+	/**
+	 * User departure
+	 */
 	const [fromCity, setFromCity] = useState('Lille');
 
+	/**
+	 * User arrival
+	 */
 	const [toCity, setToCity] = useState('Paris');
 
+	/**
+	 * User's available paths
+	 */
 	const [paths, setPaths] = useState([]);
 
 	const api = config.api.url + ':' + config.api.port + '/api/my-travel';
@@ -55,7 +73,7 @@ const Travel = () => {
 		.then(response => {
 			if (response.data.success) {
 				setPaths(response.data.routes)
-			}
+			} 
 		})
 		.catch(error => console.log('AXIOS error:', error));
 	};
