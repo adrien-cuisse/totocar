@@ -8,9 +8,9 @@ import config from './../config';
 
 const Travel = () => {
 
-	const [budget, setBudget] = useState('2');
+	const [budget, setBudget] = useState('8');
 
-	const [time, setTime] = useState('00:30');
+	const [time, setTime] = useState('04:00');
 
 	const [fromCity, setFromCity] = useState('Lille');
 
@@ -61,7 +61,7 @@ const Travel = () => {
 	};
 
 	const renderPaths = () => {
-		if (JSON.stringify(paths) === JSON.stringify([null])) {
+		if (JSON.stringify(paths) === JSON.stringify([null])) { // 
 			return (
 				<div className='p-4'>
 					<p>
@@ -69,29 +69,41 @@ const Travel = () => {
 					</p>
 				</div>
 			)
+		} else if (JSON.stringify(paths) === JSON.stringify([])) { // default state
+			return <></>;
 		} else {
 			return (
-				paths.map((route, index) => {
-					return (
-						<ul key={ index }>
-							<li>Line: { route.line }</li>
-							<li>Path: { route.path.join(' - ') }</li>
-							<li>
-								<ul>
-								{
-									route.options.map((option, index) => {
-										return (
-											<li key={ index }>{ option.join(' - ') }</li>
-										)
-									})
-								}
-								</ul>
-								
-							</li>
-						</ul>
-					)
-				})
-			)
+				<table className='table mt-4'>
+					<thead>
+						<tr>
+							<th scope='col'>Line</th>
+							<th scope='col'>Path</th>
+							<th scope='col'>Your route</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							paths.map((route, index) => (
+								<tr key={ index }>
+									<td>{ route.line }</td>
+									<td>{ route.path.join(' - ' ) }</td>
+									<td>
+										<ul className='list-group'>
+										{
+											route.options.map((option, index) => (
+												<li className='list-group-item' key={ index }>
+													{ option.join(' - ') }
+												</li>	
+											))
+										}
+										</ul>
+									</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			);
 		}
 	}
 
@@ -125,11 +137,6 @@ const Travel = () => {
 				</div>
 			</div>
 
-			{/* <div className='form-group'>
-				<label className='form-group' htmlFor='budget'>I can pay up to: (in €)</label>
-				<input className='form-control' type='number' step='1' name='budget' id='budget' onChange={ handleBudgetChange } value={ '' + budget } />
-			</div> */}
-			
 			<div className='form-group'>
 				<label className='form-group' htmlFor='time'>I want my travel to last at most: (hh:mm)</label>
 				<input className='form-control' type='time' name='time' id='time' onChange={ handleTimeChange } value={ time } />
